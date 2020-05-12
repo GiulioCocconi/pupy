@@ -13,8 +13,8 @@ username=$(whoami)
 sudo su root <<'EOF'
 
 # Apt update and installs
-apt update
-apt install python-pip curl -y
+#apt update
+#apt install python-pip curl -y
 
 # Install Docker
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
@@ -25,7 +25,7 @@ else
     echo 'deb https://download.docker.com/linux/debian stretch stable' > /etc/apt/sources.list.d/docker.list
 fi
 
-apt update
+#apt update
 apt-get install docker-ce -y
 systemctl start docker
 systemctl enable docker
