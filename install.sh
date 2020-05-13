@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Check to make sure script is not initially run as root
-if [ "$EUID" == 0 ]
-  then echo "Please do not run as root. Script will prompt for sudo password."
-  exit
-fi
+#if [ "$EUID" == 0 ]
+  #then echo "Please do not run as root. Script will prompt for sudo password."
+  #exit
+#fi
 
 # Get username for regular user.
-username=$(whoami)
+#username=$(whoami)
 
 # Start root section
-sudo su root <<'EOF'
+#sudo su root <<'EOF'
 
 # Apt update and installs
 #apt update
@@ -34,8 +34,8 @@ systemctl enable docker
 pip install docker-compose
 
 # Add user to docker group
-usermod -aG docker $username
-
+#usermod -aG docker $username
+usermod -aG docker root
 # End of root section
 EOF
 
@@ -43,6 +43,7 @@ EOF
 git submodule update --init --recursive
 
 # Download latest compiled payload templates
+cd /opt
 wget https://github.com/n1nj4sec/pupy/releases/download/latest/payload_templates.txz
 tar xvf payload_templates.txz && mv payload_templates/* pupy/payload_templates/ && rm payload_templates.txz && rm -r payload_templates
 
